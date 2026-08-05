@@ -7,20 +7,17 @@ $pdo = obtenerConexion();
 $mensajeExito = '';
 $mensajeError = '';
 
-// Procesamiento del formulario enviado por POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $correo     = trim($_POST['correo'] ?? '');
     $nombre     = trim($_POST['nombre'] ?? '');
     $asunto     = trim($_POST['asunto'] ?? '');
     $comentario = trim($_POST['comentario'] ?? '');
 
-    // Validación básica en el servidor
     if ($nombre === '' || $correo === '' || $asunto === '' || $comentario === '') {
         $mensajeError = 'Por favor completa todos los campos.';
     } elseif (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
         $mensajeError = 'El correo electrónico no es válido.';
     } elseif (sizeof(explode(' ', $comentario)) < 1) {
-        // Ejemplo de uso de sizeof() solicitado en el enunciado
         $mensajeError = 'El comentario no puede estar vacío.';
     } else {
         try {
@@ -36,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ]);
 
             $mensajeExito = '¡Gracias, ' . htmlspecialchars($nombre) . '! Tu mensaje fue enviado correctamente.';
-            // Limpiamos los campos tras el envío exitoso
             $correo = $nombre = $asunto = $comentario = '';
         } catch (PDOException $e) {
             $mensajeError = 'Ocurrió un error al guardar tu mensaje. Intenta nuevamente.';

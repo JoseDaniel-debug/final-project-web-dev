@@ -1,21 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 2.7.0-pl2
--- http://www.phpmyadmin.net
--- 
--- Servidor: localhost
--- Tiempo de generación: 20-05-2008 a las 05:30:59
--- Versión del servidor: 5.0.18
--- Versión de PHP: 5.1.2
--- 
--- Base de datos: `dblibreria`
--- 
-
--- --------------------------------------------------------
-
--- 
--- Estructura de tabla para la tabla `autores`
--- 
-
 CREATE TABLE `autores` (
   `id_autor` varchar(11) NOT NULL,
   `apellido` varchar(15) NOT NULL,
@@ -29,9 +11,6 @@ CREATE TABLE `autores` (
   PRIMARY KEY  (`id_autor`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- 
--- Volcar la base de datos para la tabla `autores`
--- 
 
 INSERT INTO `autores` VALUES ('172-32-117', 'White', 'Johnson   ', '408-496-7210', 'BiggMenlo ', 'Park', 'CA', 'USA', 94025);
 INSERT INTO `autores` VALUES ('213-46-891', 'Green', 'Marjorie  ', '415 986-7030', '63rd', 'SOakland', 'CA', 'USA', 94618);
@@ -56,11 +35,6 @@ INSERT INTO `autores` VALUES ('893-72-1158', 'McBadden', 'Heather', '707 448-498
 INSERT INTO `autores` VALUES ('899-46-2035', 'Ringer', 'Anne', '801 826-0752', '67 Seventh Av.', 'Salt Lake City', 'UT', 'USA', 84152);
 INSERT INTO `autores` VALUES ('998-72-3567', 'Ringer', 'Albert', '801 826-0752', '67 Seventh Av.', 'Salt Lake City', 'UT', 'USA', 84152);
 
--- --------------------------------------------------------
-
--- 
--- Estructura de tabla para la tabla `biografias`
--- 
 
 CREATE TABLE `biografias` (
   `id_autor` varchar(11) NOT NULL,
@@ -68,9 +42,6 @@ CREATE TABLE `biografias` (
   PRIMARY KEY  (`id_autor`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- 
--- Volcar la base de datos para la tabla `biografias`
--- 
 
 INSERT INTO `biografias` VALUES ('486-29-1786', 'If Chastity Locksley didn''t exist, this troubled world would have created her!  Not only did she master the mystic secrets of inner strength to conquer adversity when she encountered it in life, but, after "reinventing herself", as she says, by writing "E');
 INSERT INTO `biografias` VALUES ('648-92-1872', 'A chef''s chef and a raconteur''s raconteur, Reginald Blotchet-Halls calls London his second home. "Th'' palace kitchen''s me first ''ome, act''lly!" Blotchet-Halls'' astounding ability to delight our palates with palace delights is matched only by his equal ski');
@@ -79,11 +50,7 @@ INSERT INTO `biografias` VALUES ('899-46-2035', 'Anne Ringer ran away from the c
 INSERT INTO `biografias` VALUES ('672-71-3249', 'They asked me to write about myself and my book, so here goes:  I started a restaurant called "de Gustibus" with two of my friends.  We named it that because you really can''t discuss taste.  We''re very popular with young business types because we''re young');
 INSERT INTO `biografias` VALUES ('409-56-7008', 'Bennet was the classic too-busy executive.  After discovering computer databases he now has the time to run several successful businesses and sit on three major corporate boards.  Bennet also donates time to community service organizations.  Miraculously,');
 
--- --------------------------------------------------------
 
--- 
--- Estructura de tabla para la tabla `derechos`
--- 
 
 CREATE TABLE `derechos` (
   `id_titulo` varchar(6) NOT NULL,
@@ -184,11 +151,7 @@ INSERT INTO `derechos` VALUES ('PS1372', 20001, 30000, 14);
 INSERT INTO `derechos` VALUES ('PS1372', 30001, 40000, 16);
 INSERT INTO `derechos` VALUES ('PS1372', 40001, 50000, 18);
 
--- --------------------------------------------------------
-
--- 
--- Estructura de tabla para la tabla `descuento`
--- 
+ 
 
 CREATE TABLE `descuento` (
   `id_tienda` varchar(4) NOT NULL,
@@ -199,20 +162,12 @@ CREATE TABLE `descuento` (
   KEY `id_tienda` (`id_tienda`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- 
--- Volcar la base de datos para la tabla `descuento`
--- 
 
 INSERT INTO `descuento` VALUES ('', 'Initial Customer', 0, 0, 10.5);
 INSERT INTO `descuento` VALUES ('', 'Volume Discount', 100, 1000, 6.7);
 INSERT INTO `descuento` VALUES ('', 'Huge Volume Discount', 1001, 0, 10);
 INSERT INTO `descuento` VALUES ('8042', 'Customer Discount', 0, 0, 5);
 
--- --------------------------------------------------------
-
--- 
--- Estructura de tabla para la tabla `detalle_venta`
--- 
 
 CREATE TABLE `detalle_venta` (
   `id_tienda` varchar(4) NOT NULL,
@@ -223,9 +178,6 @@ CREATE TABLE `detalle_venta` (
   PRIMARY KEY  (`id_tienda`,`num_orden`,`id_titulo`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- 
--- Volcar la base de datos para la tabla `detalle_venta`
--- 
 
 INSERT INTO `detalle_venta` VALUES ('7896', '234518', 'TC3218', 75, 40);
 INSERT INTO `detalle_venta` VALUES ('7896', '234518', 'TC7777', 75, 40);
@@ -340,11 +292,6 @@ INSERT INTO `detalle_venta` VALUES ('6380', '234518', 'BU1032', 320, 46);
 INSERT INTO `detalle_venta` VALUES ('6380', '234518', 'TC4203', 300, 46);
 INSERT INTO `detalle_venta` VALUES ('6380', '234518', 'MC3021', 400, 46);
 
--- --------------------------------------------------------
-
--- 
--- Estructura de tabla para la tabla `fotografias`
--- 
 
 CREATE TABLE `fotografias` (
   `id_autor` varchar(11) NOT NULL,
@@ -352,16 +299,6 @@ CREATE TABLE `fotografias` (
   PRIMARY KEY  (`id_autor`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- 
--- Volcar la base de datos para la tabla `fotografias`
--- 
-
-
--- --------------------------------------------------------
-
--- 
--- Estructura de tabla para la tabla `publicadores`
--- 
 
 CREATE TABLE `publicadores` (
   `id_pub` varchar(4) NOT NULL,
@@ -371,19 +308,11 @@ CREATE TABLE `publicadores` (
   PRIMARY KEY  (`id_pub`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- 
--- Volcar la base de datos para la tabla `publicadores`
--- 
 
 INSERT INTO `publicadores` VALUES ('0736', 'New Age Books', 'Boston', 'MA');
 INSERT INTO `publicadores` VALUES ('0877', 'Binnet & Hardley', 'Washington', 'DC');
 INSERT INTO `publicadores` VALUES ('1389', 'Algodata Infosystems', 'Berkeley', 'CA');
 
--- --------------------------------------------------------
-
--- 
--- Estructura de tabla para la tabla `tiendas`
--- 
 
 CREATE TABLE `tiendas` (
   `id_tienda` varchar(4) NOT NULL,
@@ -397,9 +326,6 @@ CREATE TABLE `tiendas` (
   PRIMARY KEY  (`id_tienda`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- 
--- Volcar la base de datos para la tabla `tiendas`
--- 
 
 INSERT INTO `tiendas` VALUES ('7066', 'Barnum''s', '567 Pasadena Ave.', 'Tustin', 'CA', 'USA', '92789', 'Net 30');
 INSERT INTO `tiendas` VALUES ('7067', 'News & Brews', '577 First St.', 'Los Gatos', 'CA', 'USA', '96745', 'Net 30');
@@ -409,11 +335,6 @@ INSERT INTO `tiendas` VALUES ('6380', 'Eric the Read Books', '788 Catamaugus Ave
 INSERT INTO `tiendas` VALUES ('7896', 'Fricative Bookshop', '89 Madison St.', 'Fremont', 'CA', 'USA', '90019', 'Net 60');
 INSERT INTO `tiendas` VALUES ('5023', 'Thoreau Reading Discount Chain', '20435 Walden Expressway', 'Concord', 'MA', 'USA', '01776', 'Net 60');
 
--- --------------------------------------------------------
-
--- 
--- Estructura de tabla para la tabla `titulo_autor`
--- 
 
 CREATE TABLE `titulo_autor` (
   `id_autor` varchar(11) NOT NULL,
@@ -423,9 +344,6 @@ CREATE TABLE `titulo_autor` (
   PRIMARY KEY  (`id_autor`,`id_titulo`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- 
--- Volcar la base de datos para la tabla `titulo_autor`
--- 
 
 INSERT INTO `titulo_autor` VALUES ('172-32-1176', 'PS3333', '1', 100);
 INSERT INTO `titulo_autor` VALUES ('213-46-8915', 'BU1032', '2', 40);
@@ -453,11 +371,6 @@ INSERT INTO `titulo_autor` VALUES ('899-46-2035', 'PS2091', '2', 50);
 INSERT INTO `titulo_autor` VALUES ('998-72-3567', 'PS2091', '1', 50);
 INSERT INTO `titulo_autor` VALUES ('998-72-3567', 'PS2106', '1', 100);
 
--- --------------------------------------------------------
-
--- 
--- Estructura de tabla para la tabla `titulos`
--- 
 
 CREATE TABLE `titulos` (
   `id_titulo` varchar(6) NOT NULL,
@@ -473,9 +386,6 @@ CREATE TABLE `titulos` (
   PRIMARY KEY  (`id_titulo`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- 
--- Volcar la base de datos para la tabla `titulos`
--- 
 
 INSERT INTO `titulos` VALUES ('BU1032', 'The Busy Executive''s Database Guide', 'business', '1389', 20, 5000, 4095, 'An overview of available database systems with emphasis on common business applications.  Illustrated.', '1986-06-12 12:00:00', '1');
 INSERT INTO `titulos` VALUES ('BU1111', 'Cooking with Computers: Surreptitious Balance Sheets', 'business', '1389', 12, 5000, 3876, 'Helpful hints on how to use your electronic resources to the best advantage.', '1988-06-09 12:00:00', '1');
@@ -496,11 +406,7 @@ INSERT INTO `titulos` VALUES ('TC3218', 'Onions, Leeks, and Garlic: Cooking Secr
 INSERT INTO `titulos` VALUES ('TC4203', 'Fifty Years in Buckingham Palace Kitchens', 'trad_cook', '0877', 12, 4000, 15096, 'More anecdotes from the Queen''s favorite cook describing life among English royalty.  Recipes, techniques, tender vignettes.', '1985-06-12 12:00:00', '1');
 INSERT INTO `titulos` VALUES ('TC7777', 'Sushi, Anyone?', 'trad_cook', '0877', 15, 8000, 4095, 'Detailed instructions on improving your position in life by learning how to make authentic Japanese sushi in your spare time.  5-10% increase in number of friends per recipe reported from beta test.', '1987-06-12 12:00:00', '1');
 
--- --------------------------------------------------------
 
--- 
--- Estructura de tabla para la tabla `ventas`
--- 
 
 CREATE TABLE `ventas` (
   `id_tienda` varchar(4) NOT NULL,
@@ -509,9 +415,7 @@ CREATE TABLE `ventas` (
   KEY `id_tienda` (`id_tienda`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- 
--- Volcar la base de datos para la tabla `ventas`
--- 
+
 
 INSERT INTO `ventas` VALUES ('5023', 'AB-123-DEF-425-1Z3', '1985-10-31 12:00:08');
 INSERT INTO `ventas` VALUES ('5023', 'AB-872-DEF-732-2Z1', '1985-11-06 12:00:00');

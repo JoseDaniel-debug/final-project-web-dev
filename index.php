@@ -17,8 +17,8 @@ require 'includes/header.php';
 ?>
 
 <div class="hero text-center">
-    <h1 class="display-5 fw-bold"><i class="bi bi-book"></i> Bienvenido a Librería Online</h1>
-    <p class="lead mb-0">Consulta nuestro catálogo de libros, conoce a los autores y contáctanos.</p>
+    <h1 class="display-5 fw-bold"><i class="bi bi-book"></i> Bienvenido a Librería Jose Daniel</h1>
+    <p class="lead mb-0">Consulta nuestro catálogo de libros y dejame tu comentario para que el profe me ponga nota.</p>
 </div>
 
 <div class="row g-4 mb-4">

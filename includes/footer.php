@@ -2,7 +2,7 @@
 
 <footer class="bg-dark text-light py-3 mt-5">
     <div class="container text-center small">
-        &copy; <?= date('Y') ?> Librería Online &mdash; Proyecto Final de Programación Web
+        &copy; <?= date('Y') ?> Librería Jose Daniel &mdash; Proyecto Final de Programación Web
     </div>
 </footer>
 

@@ -4,13 +4,10 @@ require_once 'config/conexion.php';
 $tituloPagina = 'Libros';
 $pdo = obtenerConexion();
 
-// Filtro opcional por categoría, recibido por GET
 $categoriaSeleccionada = isset($_GET['categoria']) ? trim($_GET['categoria']) : '';
 
-// Obtenemos las categorías disponibles para el filtro
 $categorias = $pdo->query('SELECT DISTINCT tipo FROM titulos ORDER BY tipo')->fetchAll();
 
-// Consulta principal: libros + nombre de la editorial, con PDO
 if ($categoriaSeleccionada !== '') {
     $sql = 'SELECT t.id_titulo, t.titulo, t.tipo, t.precio, t.total_ventas, t.fecha_pub, p.nombre_pub
             FROM titulos t

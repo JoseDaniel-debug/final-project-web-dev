@@ -4,73 +4,76 @@ require_once 'config/conexion.php';
 $tituloPagina = 'Inicio';
 $pdo = obtenerConexion();
 
-// Totales usando PDO::query() + count()
 $totalLibros  = count($pdo->query('SELECT id_titulo FROM titulos')->fetchAll());
 $totalAutores = count($pdo->query('SELECT id_autor FROM autores')->fetchAll());
 $totalEditoriales = count($pdo->query('SELECT id_pub FROM publicadores')->fetchAll());
 
-// Últimos libros publicados (ejemplo de consulta con LIMIT)
-$stmt = $pdo->query('SELECT titulo, tipo, precio, fecha_pub FROM titulos ORDER BY fecha_pub DESC LIMIT 5');
+$stmt = $pdo->query('SELECT titulo, tipo, precio, fecha_pub FROM titulos ORDER BY fecha_pub DESC LIMIT 6');
 $ultimosLibros = $stmt->fetchAll();
 
 require 'includes/header.php';
 ?>
 
-<div class="hero text-center">
-    <h1 class="display-5 fw-bold"><i class="bi bi-book"></i> Bienvenido a Librería Jose Daniel</h1>
-    <p class="lead mb-0">Consulta nuestro catálogo de libros y dejame tu comentario para que el profe me ponga nota.</p>
+<div class="hero">
+    <div class="hero__content">
+        <span class="hero__eyebrow">Catalogo digital</span>
+        <h1 class="fw-bold mt-2">Bienvenido a Libreria Jose Daniel</h1>
+        <p class="lead mb-0">Consulta nuestro catalogo de libros y dejame tu comentario para que el profe me ponga nota.</p>
+    </div>
+    <i class="bi bi-book hero__icon"></i>
 </div>
 
 <div class="row g-4 mb-4">
     <div class="col-md-4">
-        <div class="card card-resumen text-center p-4">
-            <i class="bi bi-journal-bookmark display-4 text-primary mb-2"></i>
-            <h3 class="fw-bold"><?= $totalLibros ?></h3>
-            <p class="text-muted mb-0">Libros disponibles</p>
+        <div class="stat-card">
+            <span class="stat-card__icon stat-card__icon--primary"><i class="bi bi-journal-bookmark"></i></span>
+            <div>
+                <p class="stat-card__value"><?= $totalLibros ?></p>
+                <p class="stat-card__label">Libros disponibles</p>
+            </div>
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card card-resumen text-center p-4">
-            <i class="bi bi-people display-4 text-primary mb-2"></i>
-            <h3 class="fw-bold"><?= $totalAutores ?></h3>
-            <p class="text-muted mb-0">Autores registrados</p>
+        <div class="stat-card">
+            <span class="stat-card__icon stat-card__icon--accent"><i class="bi bi-people"></i></span>
+            <div>
+                <p class="stat-card__value"><?= $totalAutores ?></p>
+                <p class="stat-card__label">Autores registrados</p>
+            </div>
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card card-resumen text-center p-4">
-            <i class="bi bi-building display-4 text-primary mb-2"></i>
-            <h3 class="fw-bold"><?= $totalEditoriales ?></h3>
-            <p class="text-muted mb-0">Editoriales</p>
+        <div class="stat-card">
+            <span class="stat-card__icon stat-card__icon--dark"><i class="bi bi-building"></i></span>
+            <div>
+                <p class="stat-card__value"><?= $totalEditoriales ?></p>
+                <p class="stat-card__label">Editoriales</p>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="card card-resumen p-4">
-    <h4 class="mb-3"><i class="bi bi-clock-history"></i> Últimos libros publicados</h4>
-    <div class="table-responsive">
-        <table class="table table-hover align-middle">
-            <thead>
-                <tr>
-                    <th>Título</th>
-                    <th>Categoría</th>
-                    <th>Precio</th>
-                    <th>Fecha de publicación</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($ultimosLibros as $libro): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($libro['titulo']) ?></td>
-                        <td><span class="badge bg-secondary badge-tipo"><?= htmlspecialchars($libro['tipo']) ?></span></td>
-                        <td><?= $libro['precio'] !== null ? '$' . number_format((float)$libro['precio'], 2) : 'N/D' ?></td>
-                        <td><?= date('d/m/Y', strtotime($libro['fecha_pub'])) ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+<div class="panel">
+    <h4 class="panel__title"><i class="bi bi-clock-history"></i> Ultimos libros publicados</h4>
+    <div class="row g-3">
+        <?php foreach ($ultimosLibros as $libro): ?>
+            <div class="col-sm-6 col-lg-4">
+                <div class="mini-book">
+                    <span class="mini-book__icon"><i class="bi bi-book"></i></span>
+                    <div>
+                        <p class="mini-book__title"><?= htmlspecialchars($libro['titulo']) ?></p>
+                        <p class="mini-book__sub">
+                            <?= htmlspecialchars(ucfirst($libro['tipo'])) ?> &middot;
+                            <?= $libro['precio'] !== null ? '$' . number_format((float)$libro['precio'], 2) : 'N/D' ?> &middot;
+                            <?= date('d/m/Y', strtotime($libro['fecha_pub'])) ?>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
-    <a href="libros.php" class="btn btn-primary mt-2 align-self-start">
-        Ver catálogo completo <i class="bi bi-arrow-right"></i>
+    <a href="libros.php" class="btn btn-primary mt-4 align-self-start">
+        Ver catalogo completo <i class="bi bi-arrow-right"></i>
     </a>
 </div>
 

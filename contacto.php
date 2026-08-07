@@ -16,9 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($nombre === '' || $correo === '' || $asunto === '' || $comentario === '') {
         $mensajeError = 'Por favor completa todos los campos.';
     } elseif (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-        $mensajeError = 'El correo electrónico no es válido.';
+        $mensajeError = 'El correo electronico no es valido.';
     } elseif (sizeof(explode(' ', $comentario)) < 1) {
-        $mensajeError = 'El comentario no puede estar vacío.';
+        $mensajeError = 'El comentario no puede estar vacio.';
     } else {
         try {
             $sql = 'INSERT INTO contacto (fecha, correo, nombre, asunto, comentario)
@@ -32,10 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ':comentario' => $comentario,
             ]);
 
-            $mensajeExito = '¡Gracias, ' . htmlspecialchars($nombre) . '! Tu mensaje fue enviado correctamente.';
+            $mensajeExito = 'Gracias, ' . htmlspecialchars($nombre) . '! Tu mensaje fue enviado correctamente.';
             $correo = $nombre = $asunto = $comentario = '';
         } catch (PDOException $e) {
-            $mensajeError = 'Ocurrió un error al guardar tu mensaje. Intenta nuevamente.';
+            $mensajeError = 'Ocurrio un error al guardar tu mensaje. Intenta nuevamente.';
         }
     }
 }
@@ -43,11 +43,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 require 'includes/header.php';
 ?>
 
-<h2 class="mb-4"><i class="bi bi-envelope"></i> Contáctanos</h2>
+<div class="page-heading">
+    <h2><i class="bi bi-envelope"></i> Contactanos</h2>
+</div>
 
-<div class="row">
+<div class="row g-4">
     <div class="col-lg-7">
-        <div class="card card-resumen p-4">
+        <div class="panel">
 
             <?php if ($mensajeExito !== ''): ?>
                 <div class="alert alert-success" role="alert">
@@ -70,10 +72,10 @@ require 'includes/header.php';
                 </div>
 
                 <div class="mb-3">
-                    <label for="correo" class="form-label">Correo electrónico</label>
+                    <label for="correo" class="form-label">Correo electronico</label>
                     <input type="email" class="form-control" id="correo" name="correo" required
                            value="<?= htmlspecialchars($correo ?? '') ?>">
-                    <div class="invalid-feedback">Ingresa un correo electrónico válido.</div>
+                    <div class="invalid-feedback">Ingresa un correo electronico valido.</div>
                 </div>
 
                 <div class="mb-3">
@@ -97,11 +99,11 @@ require 'includes/header.php';
     </div>
 
     <div class="col-lg-5">
-        <div class="card card-resumen p-4 h-100">
-            <h5><i class="bi bi-info-circle"></i> Información</h5>
+        <div class="panel h-100">
+            <h5><i class="bi bi-info-circle"></i> Informacion</h5>
             <p class="text-muted">
                 Utiliza este formulario para enviarnos tus comentarios, preguntas o
-                sugerencias sobre nuestro catálogo de libros. Tu mensaje será
+                sugerencias sobre nuestro catalogo de libros. Tu mensaje sera
                 almacenado en nuestra base de datos y te responderemos a la
                 brevedad posible.
             </p>

@@ -30,70 +30,63 @@ $totalLibros = count($libros);
 require 'includes/header.php';
 ?>
 
-<div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
-    <h2 class="mb-0"><i class="bi bi-journal-bookmark"></i> Listado de libros</h2>
-    <span class="badge bg-primary fs-6"><?= $totalLibros ?> resultado(s)</span>
+<div class="page-heading">
+    <h2><i class="bi bi-journal-bookmark"></i> Listado de libros</h2>
+    <span class="count-pill"><?= $totalLibros ?> resultado(s)</span>
 </div>
 
-<div class="card card-resumen p-3 mb-4">
-    <form method="GET" class="row g-2 align-items-end">
-        <div class="col-sm-6 col-md-4">
-            <label for="categoria" class="form-label">Filtrar por categoría</label>
-            <select name="categoria" id="categoria" class="form-select" onchange="this.form.submit()">
-                <option value="">Todas las categorías</option>
-                <?php foreach ($categorias as $cat): ?>
-                    <option value="<?= htmlspecialchars($cat['tipo']) ?>" <?= $categoriaSeleccionada === $cat['tipo'] ? 'selected' : '' ?>>
-                        <?= htmlspecialchars(ucfirst($cat['tipo'])) ?>
-                    </option>
+<div class="row g-4">
+    <div class="col-lg-3">
+        <div class="filter-panel">
+            <form method="GET">
+                <div class="mb-3">
+                    <label for="categoria" class="form-label">Filtrar por categoria</label>
+                    <select name="categoria" id="categoria" class="form-select" onchange="this.form.submit()">
+                        <option value="">Todas las categorias</option>
+                        <?php foreach ($categorias as $cat): ?>
+                            <option value="<?= htmlspecialchars($cat['tipo']) ?>" <?= $categoriaSeleccionada === $cat['tipo'] ? 'selected' : '' ?>>
+                                <?= htmlspecialchars(ucfirst($cat['tipo'])) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="buscador" class="form-label">Buscar en el catalogo</label>
+                    <input type="text" id="buscador" class="form-control" placeholder="Escribe para filtrar...">
+                </div>
+                <?php if ($categoriaSeleccionada !== ''): ?>
+                    <a href="libros.php" class="btn btn-outline-secondary w-100">Limpiar filtro</a>
+                <?php endif; ?>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-lg-9">
+        <?php if ($totalLibros === 0): ?>
+            <div class="panel text-center text-muted py-5">No se encontraron libros.</div>
+        <?php else: ?>
+            <div class="book-grid" id="listaLibros">
+                <?php foreach ($libros as $libro): ?>
+                    <div class="book-card item-buscable">
+                        <div class="book-card__cover">
+                            <i class="bi bi-book"></i>
+                        </div>
+                        <div class="book-card__body">
+                            <p class="book-card__title"><?= htmlspecialchars($libro['titulo']) ?></p>
+                            <div class="book-card__meta">
+                                <span class="tag"><?= htmlspecialchars($libro['tipo']) ?></span>
+                            </div>
+                            <p class="book-card__publisher"><i class="bi bi-building"></i> <?= htmlspecialchars($libro['nombre_pub'] ?? 'N/D') ?></p>
+                            <p class="book-card__date"><i class="bi bi-calendar3"></i> <?= date('d/m/Y', strtotime($libro['fecha_pub'])) ?></p>
+                            <div class="book-card__footer">
+                                <span class="book-card__price"><?= $libro['precio'] !== null ? '$' . number_format((float)$libro['precio'], 2) : 'N/D' ?></span>
+                                <span class="book-card__sales"><i class="bi bi-graph-up"></i> <?= $libro['total_ventas'] !== null ? (int)$libro['total_ventas'] : 0 ?> ventas</span>
+                            </div>
+                        </div>
+                    </div>
                 <?php endforeach; ?>
-            </select>
-        </div>
-        <div class="col-sm-6 col-md-4">
-            <label for="buscador" class="form-label">Buscar en la tabla</label>
-            <input type="text" id="buscador" class="form-control" placeholder="Escribe para filtrar...">
-        </div>
-        <?php if ($categoriaSeleccionada !== ''): ?>
-            <div class="col-auto">
-                <a href="libros.php" class="btn btn-outline-secondary">Limpiar filtro</a>
             </div>
         <?php endif; ?>
-    </form>
-</div>
-
-<div class="card card-resumen p-3">
-    <div class="table-responsive">
-        <table class="table table-striped table-hover align-middle" id="tablaDatos">
-            <thead>
-                <tr>
-                    <th>Código</th>
-                    <th>Título</th>
-                    <th>Categoría</th>
-                    <th>Editorial</th>
-                    <th>Precio</th>
-                    <th>Ventas totales</th>
-                    <th>Fecha de publicación</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if ($totalLibros === 0): ?>
-                    <tr>
-                        <td colspan="7" class="text-center text-muted py-4">No se encontraron libros.</td>
-                    </tr>
-                <?php else: ?>
-                    <?php foreach ($libros as $libro): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($libro['id_titulo']) ?></td>
-                            <td><?= htmlspecialchars($libro['titulo']) ?></td>
-                            <td><span class="badge bg-secondary badge-tipo"><?= htmlspecialchars($libro['tipo']) ?></span></td>
-                            <td><?= htmlspecialchars($libro['nombre_pub'] ?? 'N/D') ?></td>
-                            <td><?= $libro['precio'] !== null ? '$' . number_format((float)$libro['precio'], 2) : 'N/D' ?></td>
-                            <td><?= $libro['total_ventas'] !== null ? (int)$libro['total_ventas'] : 0 ?></td>
-                            <td><?= date('d/m/Y', strtotime($libro['fecha_pub'])) ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-            </tbody>
-        </table>
     </div>
 </div>
 

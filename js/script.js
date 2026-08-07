@@ -15,11 +15,12 @@ document.addEventListener('DOMContentLoaded', function () {
     if (buscador) {
         buscador.addEventListener('keyup', function () {
             const texto = buscador.value.toLowerCase();
-            const filas = document.querySelectorAll('#tablaDatos tbody tr');
+            const items = document.querySelectorAll('.item-buscable');
 
-            filas.forEach(function (fila) {
-                const contenido = fila.textContent.toLowerCase();
-                fila.style.display = contenido.includes(texto) ? '' : 'none';
+            items.forEach(function (item) {
+                const contenido = item.textContent.toLowerCase();
+                const visible = contenido.includes(texto);
+                item.style.display = visible ? '' : 'none';
             });
         });
     }

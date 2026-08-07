@@ -60,9 +60,6 @@ CREATE TABLE `derechos` (
   PRIMARY KEY  (`id_titulo`,`rango_bajo`,`rango_alto`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- 
--- Volcar la base de datos para la tabla `derechos`
--- 
 
 INSERT INTO `derechos` VALUES ('BU1032', 0, 5000, 10);
 INSERT INTO `derechos` VALUES ('BU1032', 5001, 50000, 12);
